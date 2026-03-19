@@ -1,26 +1,144 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #09090b;
+  --foreground: #fafafa;
+  --accent: #22c55e;
+  --accent-dark: #16a34a;
+  --accent-glow: rgba(34, 197, 94, 0.15);
+  --muted: #a1a1aa;
+  --card: #131316;
+  --card-border: rgba(255, 255, 255, 0.06);
+  --card-border-hover: rgba(255, 255, 255, 0.12);
+  --surface: #0f0f12;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-accent: var(--accent);
+  --color-accent-dark: var(--accent-dark);
+  --color-accent-glow: var(--accent-glow);
+  --color-muted: var(--muted);
+  --color-card: var(--card);
+  --color-card-border: var(--card-border);
+  --color-card-border-hover: var(--card-border-hover);
+  --color-surface: var(--surface);
+  --font-sans: var(--font-inter);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--background);
+}
+
+.rest-wood-bg {
+  position: relative;
+  background: linear-gradient(180deg, rgba(13, 15, 18, 0.9), rgba(11, 13, 16, 0.95));
+}
+
+.rest-wood-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    repeating-linear-gradient(
+      3deg,
+      rgba(78, 50, 32, 0.52) 0px,
+      rgba(78, 50, 32, 0.52) 2px,
+      rgba(42, 29, 20, 0.5) 2px,
+      rgba(42, 29, 20, 0.5) 8px
+    ),
+    repeating-linear-gradient(
+      -2deg,
+      rgba(28, 19, 13, 0.45) 0px,
+      rgba(28, 19, 13, 0.45) 1px,
+      rgba(0, 0, 0, 0) 1px,
+      rgba(0, 0, 0, 0) 7px
+    );
+  opacity: 0.05;
+}
+
+.rest-wood-bg > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Gradient mesh for hero */
+.hero-gradient {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -20%, var(--accent-glow), transparent),
+    radial-gradient(ellipse 60% 40% at 80% 60%, rgba(34, 197, 94, 0.05), transparent);
+}
+
+.hero-workshop-bg {
+  background-image: url("/carpenter-bg.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  filter: blur(6px) brightness(0.45);
+  transform: scale(1.06);
+}
+
+.hero-workshop-overlay {
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.75),
+    rgba(0, 0, 0, 0.55),
+    rgba(0, 0, 0, 0.75)
+  );
+}
+
+/* Glow effect on cards */
+.glow-card {
+  position: relative;
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.glow-card:hover {
+  border-color: var(--card-border-hover);
+  box-shadow: 0 0 40px -12px var(--accent-glow);
+}
+
+/* Gradient border for featured card */
+.gradient-border {
+  position: relative;
+  background: var(--card);
+  border-radius: 1rem;
+}
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, var(--accent), transparent 50%, var(--accent-dark));
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Grid dot pattern */
+.dot-pattern {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Horizontal line with glow */
+.glow-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0.3;
 }
